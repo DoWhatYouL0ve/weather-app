@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledSearch = styled.div`
   position: relative;
   input {
-    border: 1px dashed black;
+    border: 1px solid black;
     width: 400px;
     padding: 8px 8px 8px 25px ;
     border-radius: 10px;
