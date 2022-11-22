@@ -6,4 +6,9 @@ export const StyledAppContainer = styled.div`
   margin: 0 auto;
   padding: 20px 0;
   border: 1px solid red;
+  text-align: center;
+  h1 {
+    color: white;
+    margin-bottom: 20px;
+  }
 `

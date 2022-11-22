@@ -4,17 +4,9 @@ export const StyledSearch = styled.div`
   position: relative;
   input {
     border: 1px solid black;
-    width: 400px;
+    width: 100%;
     padding: 8px 8px 8px 25px ;
-    border-radius: 10px;
-  }
-  label {
-    font-size: 0.6em;
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    background-color: white;
-    padding: 0 5px;
+    border-radius: 5px;
   }
   .searchIcon {
     position: absolute;
@@ -22,4 +14,8 @@ export const StyledSearch = styled.div`
     left: 5px;
     opacity: 0.5;
   }
+`
+
+export const StyledSearchWrapper = styled.div`
+  position: relative;
 `
