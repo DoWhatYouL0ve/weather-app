@@ -1,16 +1,16 @@
 import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities',
+    baseURL: process.env.REACT_APP_BASE_URL,
     withCredentials: true,
     headers: {
-        'X-RapidAPI-Key': '2d269a6ac8mshb36af9e3b596612p15ce5fjsnd0074ba9cc5e',
-        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+        'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_KEY,
+        'X-RapidAPI-Host': process.env.REACT_APP_RapidAPI_HOST
     }
 })
 
 export const getCity = (city: string) => {
-    return instance.get<{city: string},AxiosResponse<{data: Array<SearchSelectItemType>}>>(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=${city}&sort=-population&minPopulation=10000`)
+    return instance.get<{city: string},AxiosResponse<{data: Array<SearchSelectItemType>}>>(`?namePrefix=${city}&sort=-population&minPopulation=10000`)
 }
 
 
