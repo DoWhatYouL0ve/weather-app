@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: process.env.REACT_APP_CITY_BASE_URL,
     withCredentials: true,
     headers: {
         'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_KEY,
@@ -12,7 +12,6 @@ const instance = axios.create({
 export const getCity = (city: string) => {
     return instance.get<{city: string},AxiosResponse<{data: Array<SearchSelectItemType>}>>(`?namePrefix=${city}&sort=-population&minPopulation=10000`)
 }
-
 
 // types
 export type SearchSelectItemType = {
@@ -29,3 +28,5 @@ export type SearchSelectItemType = {
     type: string
     wikiDataId: string
 }
+
+

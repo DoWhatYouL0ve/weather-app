@@ -18,4 +18,5 @@ export const StyledSearch = styled.div`
 
 export const StyledSearchWrapper = styled.div`
   position: relative;
+  margin-bottom: 44px;
 `

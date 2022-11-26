@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
-import {getCity, SearchSelectItemType} from "../api/api";
+import {getCity, SearchSelectItemType} from "../api/cityAPI";
 
 const InitialState: InitialStateType = {
     citiesData: [],

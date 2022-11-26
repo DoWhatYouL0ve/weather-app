@@ -6,12 +6,9 @@ import {useAppDispatch, useAppSelector} from "../../appState/hooks/appHooks";
 import {getCities} from "../../appState/appReducer";
 import {SearchSelect} from "./select/SearchSelect";
 import { StyledSearchSelectWrapper } from "./select/styledSearchSelect";
+import {SearchSelectItemType} from "../../api/cityAPI";
 
-type SearchPropsType = {
-    onSearchChange: (searchData: string) => void
-}
-
-export const Search = ({onSearchChange}:SearchPropsType) => {
+export const Search = () => {
     const dispatch = useAppDispatch()
     const cities = useAppSelector(store => store.app.citiesData)
     console.log(cities)
@@ -21,7 +18,11 @@ export const Search = ({onSearchChange}:SearchPropsType) => {
     const debouncedValue = useDebounce<string>(value, 700)
     const onChangeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
-        onSearchChange(e.target.value)
+    }
+
+    const onClickHandler = (item: SearchSelectItemType) => {
+        setValue(`${item.city}, ${item.region}`)
+        console.log(item.latitude + ' ' + item.longitude)
     }
 
     useEffect(()=>{
@@ -39,7 +40,7 @@ export const Search = ({onSearchChange}:SearchPropsType) => {
               <input type={'search'} placeholder={'type your city name here...'} onChange={onChangeValueHandler} value={value}/>
           </StyledSearch>
           {value && <StyledSearchSelectWrapper>
-              {cities.map(i => <SearchSelect key={i.id} city={i.city} country={i.country} region={i.region}/>)}
+              {cities.map(i => <SearchSelect key={i.id} item={i} onClickHandler={()=>onClickHandler(i)}/>)}
           </StyledSearchSelectWrapper>}
       </StyledSearchWrapper>
   )

@@ -1,17 +1,22 @@
 import { StyledSearchItemSelect } from "./styledSearchSelect"
+import {SearchSelectItemType} from "../../../api/cityAPI";
 
 
 type SearchSelectPropsType = {
-    city: string
-    country: string
-    region: string
+    item: SearchSelectItemType
+    onClickHandler: () => void
 }
 
 export const SearchSelect = (props: SearchSelectPropsType) => {
+    
+    const onClickHandler = () => {
+        props.onClickHandler()
+    }
+    
     return (
-          <StyledSearchItemSelect>
-              <span>{props.city}, {props.region}</span>
-              <span>{props.country}</span>
+          <StyledSearchItemSelect onClick={onClickHandler}>
+              <span>{props.item.city}, {props.item.region}</span>
+              <span>{props.item.country}</span>
           </StyledSearchItemSelect>
     )
 }
