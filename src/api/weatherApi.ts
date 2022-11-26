@@ -2,19 +2,15 @@ import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
     baseURL: process.env.REACT_APP_OpenWeatherAPI_URL,
-    withCredentials: true,
-    headers: {
-        'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_KEY,
-    }
 })
 
 export const getCityWeather = (lat: number, lon: number) => {
     const apiKey = process.env.REACT_APP_OpenWeatherAPI_HOST
-    return instance.get<{lat: number, lon: number},AxiosResponse<{data: ResponseType}>>(`?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+    return instance.get<{lat: number, lon: number},AxiosResponse<CurrentCityType>>(`?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
 }
 
 // types
-type ResponseType = {
+export type CurrentCityType = {
     "coord": {
         "lon": number,
         "lat": number

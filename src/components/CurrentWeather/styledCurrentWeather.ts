@@ -7,11 +7,11 @@ export const StyledCurrentWeather = styled.div`
   padding: 20px 0;
   color: white;
   .todayWeatherBox {
-    width: 350px;
+    width: 400px;
     height: 210px;
     padding: 5px 8px;
     margin: 20px auto;
-    background: black;
+    background-image: linear-gradient(to left, #656769 0%, black 100%);
     border-radius: 5px;
     .top {
       display: flex;
@@ -22,13 +22,17 @@ export const StyledCurrentWeather = styled.div`
         height: 80px;
         margin: 0;
       }
-      .city, .weatherDescription {
+      .topLeft {
         text-align: left;
+        width: 304px;
       }
       .city {
         margin-top: 5px;
         font-size: 2rem;
         font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .weatherDescription {
         font-size: 0.8rem;

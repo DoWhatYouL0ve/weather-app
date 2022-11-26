@@ -17,14 +17,14 @@ export const GlobalStyles = createGlobalStyle`
   h1,h2,h3,h4,h5,h6,p { 
     margin: 0;
     padding: 0;
-    font-family: "Space Mono", Arial, serif;
+    font-family: 'Patrick Hand', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-weight: 400;
   }
 
   body {
     font-family: 'Patrick Hand', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
     letter-spacing: 2px;
     -webkit-font-smoothing: antialiased;
