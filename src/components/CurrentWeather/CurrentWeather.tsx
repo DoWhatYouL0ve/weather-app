@@ -1,9 +1,11 @@
 import {StyledCurrentWeather} from "./styledCurrentWeather";
 import {useAppSelector} from "../../appState/hooks/appHooks";
+import {StyledForecastWeatherWrapper} from "./ForecastWeather/styledForecastWeather";
+import {ForecastWeather} from "./ForecastWeather/ForecastWeather";
 
 export const CurrentWeather = () => {
 
-    const cityWeatherData = useAppSelector(store => store.app.currentCityWeather)
+    const cityWeatherData = useAppSelector(store => store.app.weather.currentCityWeather)
 
   return (
       <>
@@ -43,6 +45,9 @@ export const CurrentWeather = () => {
                     </div>
                 </div>
             </div>
+            <StyledForecastWeatherWrapper>
+                <ForecastWeather/>
+            </StyledForecastWeatherWrapper>
         </StyledCurrentWeather>
       </>
   )

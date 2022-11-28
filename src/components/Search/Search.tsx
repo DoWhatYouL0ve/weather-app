@@ -11,7 +11,6 @@ import {SearchSelectItemType} from "../../api/cityAPI";
 export const Search = () => {
     const dispatch = useAppDispatch()
     const cities = useAppSelector(store => store.app.citiesData)
-    console.log(cities)
 
     const [chosenCity, setChosenCity] = useState<boolean>(false)
     const [value, setValue] = useState<string>('')
