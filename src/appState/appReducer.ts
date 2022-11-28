@@ -6,6 +6,7 @@ import {CurrentCityType, ForecastDailyType, getCityWeather, getForecastCityWeath
 const InitialState: InitialStateType = {
     citiesData: [],
     status: false,
+    findACity: false,
     error: null,
     weather: {
         currentCityWeather: {
@@ -118,10 +119,10 @@ const InitialState: InitialStateType = {
 
 // thunk creators
 export const getCities = createAsyncThunk('app/getCities', async (city: string, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: true}))
+    thunkAPI.dispatch(setFindACityStatus({findACity: true}))
     try {
         const res = await getCity(city)
-        thunkAPI.dispatch(setAppStatus({status: false}))
+        thunkAPI.dispatch(setFindACityStatus({findACity: false}))
         return {cities: res.data.data}
     }catch(err: any) {
         const error: AxiosError = err
@@ -131,11 +132,11 @@ export const getCities = createAsyncThunk('app/getCities', async (city: string, 
 })
 
 export const getCurrentCityWeather = createAsyncThunk('app/getCurrentCityWeathers', async (data:{lat: number, lon: number}, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: true}))
+    thunkAPI.dispatch(setWeatherStatus({status: true}))
     try {
         const resW = await getCityWeather(data.lat, data.lon)
         const resF = await getForecastCityWeather(data.lat, data.lon)
-        thunkAPI.dispatch(setAppStatus({status: false}))
+        thunkAPI.dispatch(setWeatherStatus({status: false}))
         return {currentCityWeather: resW.data, forecastWeather: resF.data}
     }catch(err: any) {
         const error: AxiosError = err
@@ -148,8 +149,10 @@ const slice = createSlice({
     initialState: InitialState,
     name: 'app',
     reducers: {
-        setAppStatus(state, action: PayloadAction<{status: boolean}>) {
+        setWeatherStatus(state, action: PayloadAction<{status: boolean}>) {
             state.status = action.payload.status},
+        setFindACityStatus(state, action: PayloadAction<{findACity: boolean}>) {
+            state.findACity = action.payload.findACity},
         setAppError(state, action: PayloadAction<{error: string | null}>) {
             state.error = action.payload.error},
     }, extraReducers: builder => {
@@ -162,12 +165,13 @@ const slice = createSlice({
     }})
 
 export const appReducer = slice.reducer
-export const {setAppError, setAppStatus} = slice.actions
+export const {setAppError, setWeatherStatus, setFindACityStatus} = slice.actions
 
 // types
 type InitialStateType = {
     citiesData: Array<SearchSelectItemType>
     status: boolean
+    findACity: boolean
     error: string | null
     weather: {
         currentCityWeather: CurrentCityType
