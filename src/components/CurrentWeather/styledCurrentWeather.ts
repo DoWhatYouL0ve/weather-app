@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledCurrentWeather = styled.div`
-  height: calc(100vh - 207px);
+  min-height: 660px;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 5px;
   padding: 20px 0;

@@ -7,7 +7,7 @@ const InitialState: InitialStateType = {
     citiesData: [],
     status: false,
     findACity: false,
-    error: null,
+    error: '',
     weather: {
         currentCityWeather: {
             "coord": {
@@ -126,7 +126,7 @@ export const getCities = createAsyncThunk('app/getCities', async (city: string, 
         return {cities: res.data.data}
     }catch(err: any) {
         const error: AxiosError = err
-        //handleNetworkError(error, thunkAPI.dispatch)
+        thunkAPI.dispatch(setAppError({error: error.message}))
         return thunkAPI.rejectWithValue({errors: [error.message], fieldsErrors: undefined})
     }
 })
@@ -140,7 +140,7 @@ export const getCurrentCityWeather = createAsyncThunk('app/getCurrentCityWeather
         return {currentCityWeather: resW.data, forecastWeather: resF.data}
     }catch(err: any) {
         const error: AxiosError = err
-        //handleNetworkError(error, thunkAPI.dispatch)
+        thunkAPI.dispatch(setAppError({error: error.message}))
         return thunkAPI.rejectWithValue({errors: [error.message], fieldsErrors: undefined})
     }
 })
@@ -153,7 +153,7 @@ const slice = createSlice({
             state.status = action.payload.status},
         setFindACityStatus(state, action: PayloadAction<{findACity: boolean}>) {
             state.findACity = action.payload.findACity},
-        setAppError(state, action: PayloadAction<{error: string | null}>) {
+        setAppError(state, action: PayloadAction<{error: string}>) {
             state.error = action.payload.error},
     }, extraReducers: builder => {
         builder.addCase(getCities.fulfilled, (state, action) => {
@@ -172,7 +172,7 @@ type InitialStateType = {
     citiesData: Array<SearchSelectItemType>
     status: boolean
     findACity: boolean
-    error: string | null
+    error: string
     weather: {
         currentCityWeather: CurrentCityType
         forecastWeather: ForecastDailyType

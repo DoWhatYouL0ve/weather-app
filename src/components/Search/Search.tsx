@@ -11,6 +11,7 @@ import {SearchSelectItemType} from "../../api/cityAPI";
 export const Search = () => {
     const dispatch = useAppDispatch()
     const cities = useAppSelector(store => store.app.citiesData)
+    const citySearchLoader = useAppSelector(store => store.app.findACity)
 
     const [chosenCity, setChosenCity] = useState<boolean>(false)
     const [value, setValue] = useState<string>('')
@@ -39,6 +40,7 @@ export const Search = () => {
   return (
       <StyledSearchWrapper>
           <StyledSearch>
+              {citySearchLoader && <div className="loader-line"/>}
               <BiSearch className={'searchIcon'} />
               <input type={'search'} placeholder={'type your city name here...'} onChange={onChangeValueHandler} value={value}/>
           </StyledSearch>
