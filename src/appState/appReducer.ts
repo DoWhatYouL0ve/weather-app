@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AnyAction, createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import {getCity, SearchSelectItemType} from "../api/cityAPI";
 import {CurrentCityType, ForecastDailyType, getCityWeather, getForecastCityWeather} from "../api/weatherApi";
@@ -119,29 +119,23 @@ const InitialState: InitialStateType = {
 
 // thunk creators
 export const getCities = createAsyncThunk('app/getCities', async (city: string, thunkAPI) => {
-    thunkAPI.dispatch(setFindACityStatus({findACity: true}))
     try {
         const res = await getCity(city)
-        thunkAPI.dispatch(setFindACityStatus({findACity: false}))
         return {cities: res.data.data}
     }catch(err: any) {
         const error: AxiosError = err
-        thunkAPI.dispatch(setAppError({error: error.message}))
-        return thunkAPI.rejectWithValue({errors: [error.message], fieldsErrors: undefined})
+        return thunkAPI.rejectWithValue({error: error.message})
     }
 })
 
 export const getCurrentCityWeather = createAsyncThunk('app/getCurrentCityWeathers', async (data:{lat: number, lon: number}, thunkAPI) => {
-    thunkAPI.dispatch(setWeatherStatus({status: true}))
     try {
         const resW = await getCityWeather(data.lat, data.lon)
         const resF = await getForecastCityWeather(data.lat, data.lon)
-        thunkAPI.dispatch(setWeatherStatus({status: false}))
         return {currentCityWeather: resW.data, forecastWeather: resF.data}
     }catch(err: any) {
         const error: AxiosError = err
-        thunkAPI.dispatch(setAppError({error: error.message}))
-        return thunkAPI.rejectWithValue({errors: [error.message], fieldsErrors: undefined})
+        return thunkAPI.rejectWithValue({error: error.message})
     }
 })
 
@@ -149,23 +143,39 @@ const slice = createSlice({
     initialState: InitialState,
     name: 'app',
     reducers: {
-        setWeatherStatus(state, action: PayloadAction<{status: boolean}>) {
-            state.status = action.payload.status},
-        setFindACityStatus(state, action: PayloadAction<{findACity: boolean}>) {
-            state.findACity = action.payload.findACity},
         setAppError(state, action: PayloadAction<{error: string}>) {
             state.error = action.payload.error},
     }, extraReducers: builder => {
+        builder.addCase(getCities.pending, (state,action) => {
+            state.findACity = true
+            state.error = ''
+        })
         builder.addCase(getCities.fulfilled, (state, action) => {
             state.citiesData = action.payload.cities
+            state.findACity = false
+        })
+        builder.addCase(getCurrentCityWeather.pending, (state, action) => {
+            state.status = true
+            state.error = ''
         })
         builder.addCase(getCurrentCityWeather.fulfilled, (state, action) => {
             state.weather = {currentCityWeather: action.payload.currentCityWeather, forecastWeather: action.payload.forecastWeather}
+            state.status = false
+        })
+        builder.addMatcher(isError, (state, action: PayloadAction<string>) => {
+            state.error = action.payload
+            state.status = false
+            state.findACity = false
         })
     }})
 
 export const appReducer = slice.reducer
-export const {setAppError, setWeatherStatus, setFindACityStatus} = slice.actions
+export const {setAppError} = slice.actions
+
+// helper function for common error handling cases
+const isError = (action: AnyAction) => {
+    return action.type.endsWith('rejected')
+}
 
 // types
 type InitialStateType = {
