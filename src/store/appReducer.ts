@@ -146,7 +146,7 @@ const slice = createSlice({
         setAppError(state, action: PayloadAction<{error: string}>) {
             state.error = action.payload.error},
     }, extraReducers: builder => {
-        builder.addCase(getCities.pending, (state,action) => {
+        builder.addCase(getCities.pending, (state) => {
             state.findACity = true
             state.error = ''
         })
@@ -154,7 +154,7 @@ const slice = createSlice({
             state.citiesData = action.payload.cities
             state.findACity = false
         })
-        builder.addCase(getCurrentCityWeather.pending, (state, action) => {
+        builder.addCase(getCurrentCityWeather.pending, (state) => {
             state.status = true
             state.error = ''
         })
