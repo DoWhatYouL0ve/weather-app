@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyledInitialLoader} from "./styledInitialLoader";
+import {StyledInitialLoader} from "./styles/styledInitialLoader";
 
 export const Loading = () => {
     return (

@@ -1,8 +1,8 @@
-import {useAppDispatch} from "../../appState/hooks/appHooks";
-import { SnackbarArea } from "./styledErrorHandler";
+import {useAppDispatch} from "../../../hooks/appHooks";
+import { SnackbarArea } from "./styles/StyledErrorHandler";
 import {useEffect} from "react";
 import { VscChromeClose } from 'react-icons/vsc'
-import {setAppError} from "../../appState/appReducer";
+import {setAppError} from "../../../store/appReducer";
 
 export const ErrorHandler = () => {
     const dispatch = useAppDispatch()

@@ -1,4 +1,4 @@
-import {StyledForecastWeather} from "./styledForecastWeather";
+import {StyledForecastWeather} from "./styles/StyledForecastWeather";
 import {
     Accordion,
     AccordionItem,
@@ -6,7 +6,7 @@ import {
     AccordionItemHeading,
     AccordionItemPanel
 } from "react-accessible-accordion";
-import {useAppSelector} from "../../../appState/hooks/appHooks";
+import {useAppSelector} from "../../../hooks/appHooks";
 
 const WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 

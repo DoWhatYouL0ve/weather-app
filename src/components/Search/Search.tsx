@@ -1,11 +1,11 @@
-import {StyledSearch, StyledSearchWrapper} from "./styledSearch";
+import {StyledSearch, StyledSearchWrapper} from "./styles/StyledSearch";
 import { BiSearch } from 'react-icons/bi'
 import {ChangeEvent, useEffect, useState} from "react";
 import {useDebounce} from "./hook/useDebounce";
-import {useAppDispatch, useAppSelector} from "../../appState/hooks/appHooks";
-import {getCities, getCurrentCityWeather} from "../../appState/appReducer";
+import {useAppDispatch, useAppSelector} from "../../hooks/appHooks";
+import {getCities, getCurrentCityWeather} from "../../store/appReducer";
 import {SearchSelect} from "./select/SearchSelect";
-import { StyledSearchSelectWrapper } from "./select/styledSearchSelect";
+import { StyledSearchSelectWrapper } from "./select/styles/StyledSearchSelect";
 import {SearchSelectItemType} from "../../api/cityAPI";
 
 export const Search = () => {

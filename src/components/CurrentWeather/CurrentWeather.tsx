@@ -1,8 +1,8 @@
-import {StyledCurrentWeather} from "./styledCurrentWeather";
-import {useAppSelector} from "../../appState/hooks/appHooks";
-import {StyledForecastWeatherWrapper} from "./ForecastWeather/styledForecastWeather";
+import {StyledCurrentWeather} from "./styles/StyledCurrentWeather";
+import {useAppSelector} from "../../hooks/appHooks";
+import {StyledForecastWeatherWrapper} from "./ForecastWeather/styles/StyledForecastWeather";
 import {ForecastWeather} from "./ForecastWeather/ForecastWeather";
-import {Loading} from "../../common/initialLoader/InitialLoader";
+import {Loading} from "../common/Loader/InitialLoader";
 
 export const CurrentWeather = () => {
 

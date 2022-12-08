@@ -1,11 +1,10 @@
-import React from 'react';
 import {ThemeProvider} from "styled-components";
-import {GlobalStyles, theme } from './common/styles/global';
-import { StyledAppContainer } from './common/styles/styledAppContainer';
+import {GlobalStyles, theme } from './styles/GlobalStyles';
+import { StyledAppContainer } from './styles/commonStyles';
 import {Search} from "./components/Search/Search";
 import {CurrentWeather} from "./components/CurrentWeather/CurrentWeather";
-import {ErrorHandler} from "./common/ErrorHandler/ErrorHandler";
-import {useAppSelector} from "./appState/hooks/appHooks";
+import {ErrorHandler} from "./components/common/Error/ErrorHandler";
+import {useAppSelector} from "./hooks/appHooks";
 
 function App() {
     const error = useAppSelector(store => store.app.error)

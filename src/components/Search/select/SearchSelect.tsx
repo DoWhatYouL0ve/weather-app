@@ -1,4 +1,4 @@
-import { StyledSearchItemSelect } from "./styledSearchSelect"
+import { StyledSearchItemSelect } from "./styles/StyledSearchSelect"
 import {SearchSelectItemType} from "../../../api/cityAPI";
 
 
